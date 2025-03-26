@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name: 'CustomerEmail', defaultValue: 'admin-test', description: 'Customer email for WordPress admin')
-        string(name: 'InstanceName', defaultValue: 'testing', description: 'Instance name for WordPress')
+        string(name: 'InstanceName', defaultValue: 'testing-pipeline', description: 'Instance name for WordPress')
     }
 
     stages {
