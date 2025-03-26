@@ -19,14 +19,16 @@ pipeline {
         stage('Deploy CloudFormation Stack') {
             steps {
                 script {
-                    // Trigger the CloudFormation deployment using the generated password and customer email
-                    bat """
-                    "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation create-stack --stack-name ${params.InstanceName} \
-                    --template-body file://deploy.yaml \
-                    --parameters ParameterKey=CustomerEmail,ParameterValue=${params.CustomerEmail} \
-                    ParameterKey=CustomerPass,ParameterValue=${env.CUSTOMER_PASS} \
-                    ParameterKey=InstanceName,ParameterValue=${params.InstanceName}
-                    """
+                    withEnv(["AWS_REGION=ap-southeast-2"]) {
+                        // Trigger the CloudFormation deployment using the generated password and customer email
+                        bat """
+                        "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation create-stack --stack-name ${params.InstanceName} \
+                        --template-body file://deploy.yaml \
+                        --parameters ParameterKey=CustomerEmail,ParameterValue=${params.CustomerEmail} \
+                        ParameterKey=CustomerPass,ParameterValue=${env.CUSTOMER_PASS} \
+                        ParameterKey=InstanceName,ParameterValue=${params.InstanceName}
+                        """
+                    }
                 }
             }
         }
