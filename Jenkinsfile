@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'CustomerEmail', defaultValue: 'customer@example.com', description: 'Customer email for WordPress admin')
+        string(name: 'InstanceName', defaultValue: 'wp-instance', description: 'Instance name for WordPress')
+    }
+
     stages {
         stage('Generate Password') {
             steps {
