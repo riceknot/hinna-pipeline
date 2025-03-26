@@ -9,6 +9,7 @@ Parameters:
   CustomerPass:
     Type: String
     Description: "Customer's password, later used for automatically assign the admin account's password within WordPress."
+    
   InstanceName:
     Type: String
     Description: "Unique name for the WordPress instance."
