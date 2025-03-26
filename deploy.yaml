@@ -50,12 +50,12 @@ Resources:
           Fn::Join:
             - ""
             - - "#!/bin/bash \n"
-            - "# Create the admin user \n"
-            - "/opt/bitnami/wp-cli/bin/wp user create "
-            - !Ref CustomerEmail
-            - " --user_pass="
-            - !Ref CustomerPass
-            - " --role=administrator"
+              - "# Create the admin user \n"
+              - "/opt/bitnami/wp-cli/bin/wp user create "
+              - !Ref CustomerEmail
+              - " --user_pass="
+              - !Ref CustomerPass
+              - " --role=administrator || echo 'Error creating user' >> /tmp/wp_user_creation.log"
 
   StaticIp:
     Type: AWS::Lightsail::StaticIp
