@@ -1,1 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "CloudFormation template to deploy a WordPress instance on AWS Lightsail."
 
+Parameters:
+  CustomerEmail:
+    Type: String
+    Description: "Customer's email address, later used for URL and automatically creates an admin account within WordPress."
+
+  CustomerPass:
+    Type: String
+    Description: "Customer's password, later used for automatically assign the admin account's password within WordPress."
+  InstanceName:
+    Type: String
+    Description: "Unique name for the WordPress instance."
+
+  BlueprintId:
+    Type: String
+    Default: "wordpress"
+    Description: "Lightsail Blueprint ID for WordPress."
+  
+  BundleId:
+    Type: String
+    Default: nano_3_0
+    AllowedValues:
+      - nano_3_0
+      - micro_3_0
+      - small_3_0
+      - medium_3_0
+      - large_3_0
+      - xlarge_3_0
+      - 2xlarge_3_0
+    Description: "Lightsail Bundle (Instance Size), currently default as nano_3_0 (smallest)."
+
+    URL:
+      Type: String
+      
+
+Resources:
+  WordPressInstance:
+    Type: AWS::Lightsail::Instance
+    Properties:
+      InstanceName: !Ref InstanceName
+      BlueprintId: !Ref BlueprintId
+      BundleId: !Ref BundleId
+      KeyPairName: "your-key-pair-name"  # Make sure this key exists in Lightsail
+      AvailabilityZone: "us-east-1a"  # Change based on your region
+      Tags:
+        - Key: "Project"
+          Value: "HINNA"
+
+ StaticIp:
+    Type: AWS::Lightsail::StaticIp
+    Properties:
+      StaticIpName: !Sub "${InstanceName}-ip"
