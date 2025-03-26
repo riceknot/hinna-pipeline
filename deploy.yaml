@@ -32,9 +32,6 @@ Parameters:
       - 2xlarge_3_0
     Description: "Lightsail Bundle (Instance Size), currently default as nano_3_0 (smallest)."
 
-    URL:
-      Type: String
-
       
 Resources:
   WordPressInstance:
@@ -44,10 +41,21 @@ Resources:
       BlueprintId: !Ref BlueprintId
       BundleId: !Ref BundleId
       KeyPairName: "your-key-pair-name"  # Make sure this key exists in Lightsail
-      AvailabilityZone: "us-east-1a"  # Change based on your region
+      AvailabilityZone: "ap-southeast-4"  # Change based on your region
       Tags:
         - Key: "Project"
           Value: "HINNA"
+      UserData: 
+        Fn::Base64: 
+          Fn::Join:
+            - ""
+            - - "#!/bin/bash \n"
+              - "# Create the admin user \n"
+              - "/opt/bitnami/wp-cli/bin/wp user create "
+              - !Ref CustomerEmail
+              - " --user_pass="
+              - !Ref CustomerPass
+              - " --role=administrator"
 
   StaticIp:
     Type: AWS::Lightsail::StaticIp
