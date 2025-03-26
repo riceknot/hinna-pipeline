@@ -16,7 +16,7 @@ pipeline {
                     // Trigger the CloudFormation deployment using the generated password and customer email
                     sh """
                     aws cloudformation create-stack --stack-name ${params.InstanceName} \
-                    --template-body file://your_template.yaml \
+                    --template-body file://deploy.yaml \
                     --parameters ParameterKey=CustomerEmail,ParameterValue=${params.CustomerEmail} \
                     ParameterKey=CustomerPass,ParameterValue=${env.CUSTOMER_PASS} \
                     ParameterKey=InstanceName,ParameterValue=${params.InstanceName}
