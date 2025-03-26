@@ -21,15 +21,15 @@ Parameters:
   
   BundleId:
     Type: String
-    Default: nano_3_0
+    Default: nano_3_2
     AllowedValues:
-      - nano_3_0
-      - micro_3_0
-      - small_3_0
-      - medium_3_0
-      - large_3_0
-      - xlarge_3_0
-      - 2xlarge_3_0
+      - nano_3_2
+      - micro_3_2
+      - small_3_2
+      - medium_3_2
+      - large_3_2
+      - xlarge_3_2
+      - 2xlarge_3_2
     Description: "Lightsail Bundle (Instance Size), currently default as nano_3_0 (smallest)."
 
       
