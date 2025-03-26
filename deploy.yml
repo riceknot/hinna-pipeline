@@ -33,8 +33,8 @@ Parameters:
 
     URL:
       Type: String
-      
 
+      
 Resources:
   WordPressInstance:
     Type: AWS::Lightsail::Instance
@@ -48,7 +48,14 @@ Resources:
         - Key: "Project"
           Value: "HINNA"
 
- StaticIp:
+  StaticIp:
     Type: AWS::Lightsail::StaticIp
     Properties:
       StaticIpName: !Sub "${InstanceName}-ip"
+      AttachedTo: !Ref WordPressInstance
+
+
+Outputs:
+  WordPressPublicIP:
+    Description: "The public IP of the WordPress instance"
+    Value: !GetAtt StaticIp.IpAddress
