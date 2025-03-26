@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Trigger the CloudFormation deployment using the generated password and customer email
-                    sh """
+                    bat """
                     aws cloudformation create-stack --stack-name ${params.InstanceName} \
                     --template-body file://deploy.yaml \
                     --parameters ParameterKey=CustomerEmail,ParameterValue=${params.CustomerEmail} \
