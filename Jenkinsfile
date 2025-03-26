@@ -19,7 +19,7 @@ pipeline {
         stage('Deploy CloudFormation Stack') {
             steps {
                 script {
-                    // Trigger the CloudFormation deployment using the generated password and customer emai
+                    // Trigger the CloudFormation deployment using the generated password and customer email
                     bat """
                     "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation create-stack --stack-name ${params.InstanceName} \
                     --template-body file://deploy.yaml \
