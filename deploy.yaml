@@ -40,8 +40,8 @@ Resources:
       InstanceName: !Ref InstanceName
       BlueprintId: !Ref BlueprintId
       BundleId: !Ref BundleId
-      KeyPairName: "your-key-pair-name"  # Make sure this key exists in Lightsail
-      AvailabilityZone: "ap-southeast-4"  # Change based on your region
+      KeyPairName: "testing-pipeline"  # Make sure this key exists in Lightsail
+      AvailabilityZone: "ap-southeast-2"  # Change based on your region
       Tags:
         - Key: "Project"
           Value: "HINNA"
