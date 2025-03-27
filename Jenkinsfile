@@ -5,6 +5,7 @@ pipeline {
         // The email will be passed down from the API trigger, while instance's name will most likely will be named after the email address.
         string(name: 'CustomerEmail', defaultValue: 'admin', description: 'Customer email for WordPress admin')
         string(name: 'InstanceName', defaultValue: 'testing-lol', description: 'Instance name for WordPress')
+        string(name: 'CustomerPass', defaultValue: '', description: 'Password for WordPress') //FOR TESTING ONLY
     }
 
     stages {
@@ -14,7 +15,7 @@ pipeline {
                     // Generate a random password
                     // def randomPassword = UUID.randomUUID().toString().replace("-", "").substring(0, 12)
                     // env.CUSTOMER_PASS = randomPassword
-                    env.CUSTOMER_PASS = "admin"
+                    env.CustomerPass = "admin"
                 }
             }
         }
@@ -34,7 +35,7 @@ pipeline {
                         "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation create-stack --stack-name ${params.InstanceName} \
                         --template-body file://deploy.yaml \
                         --parameters ParameterKey=CustomerEmail,ParameterValue=${params.CustomerEmail} \
-                        ParameterKey=CustomerPass,ParameterValue=${env.CUSTOMER_PASS} \
+                        ParameterKey=CustomerPass,ParameterValue=${params.CustomerPass} \
                         ParameterKey=InstanceName,ParameterValue=${params.InstanceName}
                         """
 
