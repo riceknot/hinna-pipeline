@@ -35,7 +35,7 @@ pipeline {
                         "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation create-stack --stack-name ${params.InstanceName} \
                         --template-body file://deploy.yaml \
                         --parameters ParameterKey=CustomerEmail,ParameterValue=${params.CustomerEmail} \
-                        ParameterKey=CustomerPass,ParameterValue=${params.CustomerPass} \
+                        ParameterKey=CustomerPass,ParameterValue=${env.CustomerPass} \
                         ParameterKey=InstanceName,ParameterValue=${params.InstanceName}
                         """
 
