@@ -61,7 +61,7 @@ pipeline {
                     """, returnStdout: true).trim()
 
                     // Print the URL of the WordPress instance
-                    echo "WordPress site is available at: http://${publicIP}"
+                    echo "WordPress site is available at: https://${publicIP}"
                 }
             }
         }
