@@ -49,15 +49,15 @@ pipeline {
                 }
             }
         }
-        stage('Wait for instance to complete deployment.') {
-            steps {
-                script {
-                    bat """
-                    "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation wait stack-create-complete --stack-name ${params.InstanceName}
-                    """
-                }
-            }
-        }
+        //stage('Wait for instance to complete deployment.') {
+        //    steps {
+        //        script {
+        //            bat """
+        //           "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation wait stack-create-complete --stack-name ${params.InstanceName}
+        //            """
+        //        }
+        //    }
+        //}
         stage('Print the instance URL.') {
             steps {
                 script {
