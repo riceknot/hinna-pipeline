@@ -25,17 +25,27 @@ pipeline {
                     def hinnaApi = "https://hinna.example.com/api/pipeline-status"
 
                     // Notify HINNA that deployment has started
-                    sh "curl -X POST -H 'Content-Type: application/json' -d '{\"status\": \"started\"}' ${hinnnaApi}"
+                    bat "curl -X POST -H 'Content-Type: application/json' -d '{\"status\": \"started\"}' ${hinnaApi}"
 
-                    
-                    // Trigger the CloudFormation deployment using the generated password and customer email
-                    bat """
-                    "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation create-stack --stack-name ${params.InstanceName} \
-                    --template-body file://deploy.yaml \
-                    --parameters ParameterKey=CustomerEmail,ParameterValue=${params.CustomerEmail} \
-                    ParameterKey=CustomerPass,ParameterValue=${env.CUSTOMER_PASS} \
-                    ParameterKey=InstanceName,ParameterValue=${params.InstanceName}
-                    """
+
+                    try {
+                        // Trigger the CloudFormation deployment using the generated password and customer email
+                        bat """
+                        "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation create-stack --stack-name ${params.InstanceName} \
+                        --template-body file://deploy.yaml \
+                        --parameters ParameterKey=CustomerEmail,ParameterValue=${params.CustomerEmail} \
+                        ParameterKey=CustomerPass,ParameterValue=${env.CUSTOMER_PASS} \
+                        ParameterKey=InstanceName,ParameterValue=${params.InstanceName}
+                        """
+
+                        // Notify HINNA that deployment succeeded
+                        bat "curl -X POST -H 'Content-Type: application/json' -d '{\"status\": \"success\"}' ${hinnaApi}"
+                        
+                    } catch (Exception e) {
+                        // Notify HINNA about failure
+                        bat "curl -X POST -H 'Content-Type: application/json' -d '{\"status\": \"failed\"}' ${hinnaApi}"
+                        throw e
+                    }
                 }
             }
         }
