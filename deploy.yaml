@@ -50,7 +50,7 @@ Resources:
             - ""
             - - "#!/bin/bash \n"
               - "# Create the admin user \n"
-              - "/opt/bitnami/wp-cli/bin/wp user create "
+              - "/opt/bitnami/wp-cli/bin/wp user create admin "
               - !Ref CustomerEmail
               - " --user_pass="
               - !Ref CustomerPass
@@ -60,10 +60,16 @@ Resources:
     Type: AWS::Lightsail::StaticIp
     Properties:
       StaticIpName: !Sub "${InstanceName}-ip"
-      AttachedTo: !Ref WordPressInstance
+    DeletionPolicy: Retain
+
+  StaticIpAttachment:
+    Type: AWS::Lightsail::StaticIpAttachment
+    Properties:
+      StaticIpName: !Ref StaticIp
+      InstanceName: !Ref InstanceName
 
 
 Outputs:
   WordPressPublicIP:
     Description: "The public IP of the WordPress instance"
-    Value: !Sub "Your website is at https://${WordPressInstance.PublicIp}/wp-admin"
+    Value: !Sub "Your website is at https://${StaticIp.StaticIpAddress}/wp-admin"
