@@ -55,7 +55,7 @@ Resources:
               - "  sleep 5\n"
               - "done\n"
               - "# Create the admin user \n"
-              - "/opt/bitnami/wp-cli/bin/wp user create "
+              - "/opt/bitnami/wp-cli/bin/wp user create admin "
               - !Ref CustomerEmail
               - " --user_pass="
               - !Ref CustomerPass
