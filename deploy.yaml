@@ -66,4 +66,8 @@ Outputs:
   WordPressPublicIP:
     Description: "The public IP of the WordPress instance"
     #Value: !GetAtt StaticIp.IpAddress
-    Value: !Sub "Your website is at https://${StaticIp.StaticIpAddress}/wp-admin"
+    Value: !Join 
+      - ""
+      - - "Your website is at https://"
+        - !GetAtt StaticIp.IpAddress
+        - "/wp-admin"
