@@ -63,9 +63,9 @@ pipeline {
                 script {
                     def websiteURL = bat(
                         script: """
-                        "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation describe-stacks \
-                        --stack-name ${params.InstanceName} \
-                        --query "Stacks[0].Outputs[?OutputKey=='WordPressPublicURL'].OutputValue" \
+                        "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation describe-stacks ^
+                        --stack-name ${params.InstanceName} ^
+                        --query "Stacks[0].Outputs[?OutputKey=='WordPressPublicIP'].OutputValue" ^
                         --output text
                         """,
                         returnStdout: true
