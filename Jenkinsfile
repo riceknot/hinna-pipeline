@@ -22,10 +22,10 @@ pipeline {
             steps {
                 script {
                     // Defining HINNA website URL (will be replaced)
-                    def hinnaApi = "https://hinna.example.com/api/pipeline-status"
+                    // def hinnaApi = "https://hinna.example.com/api/pipeline-status"
 
                     // Notify HINNA that deployment has started
-                    bat "curl -X POST -H 'Content-Type: application/json' -d '{\"status\": \"started\"}' ${hinnaApi}"
+                    // bat "curl -X POST -H 'Content-Type: application/json' -d '{\"status\": \"started\"}' ${hinnaApi}"
 
 
                     try {
@@ -39,11 +39,11 @@ pipeline {
                         """
 
                         // Notify HINNA that deployment succeeded
-                        bat "curl -X POST -H 'Content-Type: application/json' -d '{\"status\": \"success\"}' ${hinnaApi}"
+                        // bat "curl -X POST -H 'Content-Type: application/json' -d '{\"status\": \"success\"}' ${hinnaApi}"
                         
                     } catch (Exception e) {
                         // Notify HINNA about failure
-                        bat "curl -X POST -H 'Content-Type: application/json' -d '{\"status\": \"failed\"}' ${hinnaApi}"
+                        // bat "curl -X POST -H 'Content-Type: application/json' -d '{\"status\": \"failed\"}' ${hinnaApi}"
                         throw e
                     }
                 }
