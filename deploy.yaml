@@ -61,6 +61,7 @@ Resources:
     Properties:
       StaticIpName: !Sub "${InstanceName}-ip"
       AttachedTo: !Ref WordPressInstance
+    DependsOn: WordPressInstance
 
 
 Outputs:
