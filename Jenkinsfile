@@ -18,7 +18,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy CloudFormation Stack') {
+        stage('Deploy CloudFormation Stack.') {
             steps {
                 script {
                     // Defining HINNA website URL (will be replaced)
@@ -49,21 +49,26 @@ pipeline {
                 }
             }
         }
-        stage('Get Public IP and Print URL') {
+        stage('Wait for instance to complete deployment.') {
             steps {
                 script {
-                    // Get the WordPress public IP address from CloudFormation output
-                    def publicIP = bat(script: """
-                        "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation describe-stacks \
-                            --stack-name ${params.InstanceName} \
-                            --query "Stacks[0].Outputs[?OutputKey=='WordPressPublicIP'].OutputValue" \
-                            --output text
-                    """, returnStdout: true).trim()
-
-                    // Print the URL of the WordPress instance
-                    echo "WordPress site is available at: https://${publicIP}"
+                    bat """
+                    "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation wait stack-create-complete --stack-name testing-instance
+                    """
                 }
             }
         }
+        stage('Print the instance URL.') {
+            steps {
+                script {
+                    bat """
+                    "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation describe-stacks \
+                    --stack-name ${params.InstanceName} \
+                    --query "Stacks[0].Outputs[?OutputKey=='WordPressPublicURL'].OutputValue" \
+                    --output text
+                    """
+                }
+            }
+        }        
     }
 }
