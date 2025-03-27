@@ -50,7 +50,7 @@ Resources:
             - ""
             - - "#!/bin/bash \n"
               - "# Create the admin user \n"
-              - "/opt/bitnami/wp-cli/bin/wp user create admin "
+              - "/opt/bitnami/wp-cli/bin/wp user create "
               - !Ref CustomerEmail
               - " --user_pass="
               - !Ref CustomerPass
