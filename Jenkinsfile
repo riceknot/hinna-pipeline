@@ -15,7 +15,7 @@ pipeline {
                     // Generate a random password
                     // def randomPassword = UUID.randomUUID().toString().replace("-", "").substring(0, 12)
                     // env.CUSTOMER_PASS = randomPassword
-                    env.CustomerPass = "admin"
+                    env.CustomerPass = 'admin'
                 }
             }
         }
