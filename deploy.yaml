@@ -60,14 +60,7 @@ Resources:
     Type: AWS::Lightsail::StaticIp
     Properties:
       StaticIpName: !Sub "${InstanceName}-ip"
-    DeletionPolicy: Retain
-
-  StaticIpAttachment:
-    Type: AWS::Lightsail::StaticIpAttachment
-    Properties:
-      StaticIpName: !Ref StaticIp
-      InstanceName: !Ref InstanceName
-
+      AttachedTo: !Ref WordPressInstance
 
 Outputs:
   WordPressPublicIP:
