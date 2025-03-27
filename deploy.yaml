@@ -40,7 +40,6 @@ Resources:
       InstanceName: !Ref InstanceName
       BlueprintId: !Ref BlueprintId
       BundleId: !Ref BundleId
-      KeyPairName: "lol-for-testing-or-something-jar-jar-binks"  # Make sure this key exists in Lightsail
       AvailabilityZone: "ap-southeast-2a"  # Change based on your region
       Tags:
         - Key: "Project"
