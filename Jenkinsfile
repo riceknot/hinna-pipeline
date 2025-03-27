@@ -53,7 +53,7 @@ pipeline {
             steps {
                 script {
                     bat """
-                    "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation wait stack-create-complete --stack-name testing-instance
+                    "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" cloudformation wait stack-create-complete --stack-name ${params.InstanceName}
                     """
                 }
             }
