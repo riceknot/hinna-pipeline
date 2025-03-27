@@ -15,13 +15,14 @@ pipeline {
                     // Generate a random password
                     // def randomPassword = UUID.randomUUID().toString().replace("-", "").substring(0, 12)
                     // env.CUSTOMER_PASS = randomPassword
-                    env.CustomerPass = 'admin'
                 }
             }
         }
         stage('Deploy CloudFormation Stack.') {
             steps {
                 script {
+                    // Set password as 'admin' FOR TESTING ONLY
+                    env.CustomerPass = 'admin'
                     // Defining HINNA website URL (will be replaced)
                     // def hinnaApi = "https://hinna.example.com/api/pipeline-status"
 
