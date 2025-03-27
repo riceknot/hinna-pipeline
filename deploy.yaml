@@ -49,6 +49,11 @@ Resources:
           Fn::Join:
             - ""
             - - "#!/bin/bash \n"
+              - "# Wait for WordPress to be fully initialized by checking if wp-cli is ready \n"
+              - "until /opt/bitnami/wp-cli/bin/wp --info > /dev/null 2>&1; do\n"
+              - "  echo 'Waiting for WordPress to initialize...'\n"
+              - "  sleep 5\n"
+              - "done\n"
               - "# Create the admin user \n"
               - "/opt/bitnami/wp-cli/bin/wp user create "
               - !Ref CustomerEmail
