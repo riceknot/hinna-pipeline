@@ -1,6 +1,8 @@
 pipeline {
     agent any
     parameters {
+        // Define parameters which is customer's email address and the name of the deploying instance.
+        // The email will be passed down from the API trigger, while instance's name will most likely will be named after the email address.
         string(name: 'CustomerEmail', defaultValue: 'admin-test', description: 'Customer email for WordPress admin')
         string(name: 'InstanceName', defaultValue: 'testing-pipeline', description: 'Instance name for WordPress')
     }
