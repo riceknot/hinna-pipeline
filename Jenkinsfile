@@ -3,7 +3,7 @@ pipeline {
     parameters {
         // Define parameters which is customer's email address and the name of the deploying instance.
         // The email will be passed down from the API trigger, while instance's name will most likely will be named after the email address.
-        string(name: 'CustomerEmail', defaultValue: 'admin-test', description: 'Customer email for WordPress admin')
+        string(name: 'CustomerEmail', defaultValue: 'admin', description: 'Customer email for WordPress admin')
         string(name: 'InstanceName', defaultValue: 'testing-lol', description: 'Instance name for WordPress')
     }
 
@@ -14,7 +14,7 @@ pipeline {
                     // Generate a random password
                     // def randomPassword = UUID.randomUUID().toString().replace("-", "").substring(0, 12)
                     // env.CUSTOMER_PASS = randomPassword
-                    env.CUSTOMER_PASS = "admin-test"
+                    env.CUSTOMER_PASS = "admin"
                 }
             }
         }
