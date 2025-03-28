@@ -44,6 +44,10 @@ Resources:
       UserData: 
         "Fn::Base64": !Sub |
             #!/bin/bash -xe
+            until /opt/bitnami/wp-cli/bin/wp --info > /dev/null 2>&1; do
+              echo 'Waiting for WordPress to initialize...' >> /tmp/userdata.log
+              sleep 5
+            done
             sudo /opt/bitnami/wp-cli/bin/wp user create admin "${CustomerEmail}" --user_pass="${CustomerPass}" --role=administrator
 
   StaticIp:
