@@ -54,8 +54,7 @@ Resources:
             echo "WordPress initialized."
       
             # Create the admin user with correct email and password
-            sudo /opt/bitnami/wp-cli/bin/wp user create admin "${CustomerEmail}" --user_pass="${CustomerPass}" --role=administrator || echo 'Error creating user' >> /tmp/wp_user_creation.log
-            echo 'Admin user created successfully' >> /tmp/wp_user_creation.log
+            sudo /opt/bitnami/wp-cli/bin/wp user create admin "${CustomerEmail}" --user_pass="${CustomerPass}" --role=administrator
 
   StaticIp:
     Type: AWS::Lightsail::StaticIp
