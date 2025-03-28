@@ -44,7 +44,7 @@ Resources:
       UserData: 
         Fn::Base64: !Sub |
             #!/bin/bash -xe
-            sleep 10
+            sleep 30
             sudo /opt/bitnami/wp-cli/bin/wp user create admin "${CustomerEmail}" --user_pass="${CustomerPass}" --role=administrator
 
   StaticIp:
