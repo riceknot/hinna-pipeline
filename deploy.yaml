@@ -42,16 +42,8 @@ Resources:
       BundleId: !Ref BundleId
       AvailabilityZone: "ap-southeast-2a"  # Change based on your region
       UserData: 
-        "Fn::Base64": 
-          !Sub |
+        "Fn::Base64": !Sub |
             #!/bin/bash -xe
-            yum update -y
-            echo "Waiting for WordPress to initialize..."
-            until sudo /opt/bitnami/wp-cli/bin/wp --info > /dev/null 2>&1; do
-              sleep 5
-            done
-            echo "WordPress initialized."
-      
             # Create the admin user with correct email and password
             sudo /opt/bitnami/wp-cli/bin/wp user create admin "${CustomerEmail}" --user_pass="${CustomerPass}" --role=administrator
 
