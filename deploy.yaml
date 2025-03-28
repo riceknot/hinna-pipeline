@@ -45,7 +45,9 @@ Resources:
         Fn::Base64:
           Fn::Join:
             - ""
-            - - "sudo /opt/bitnami/wp-cli/bin/wp user create admin "
+            - - "#!/bin/bash\n"
+              - "echo 'Creating WordPress admin user...'\n"
+              - "sudo /opt/bitnami/wp-cli/bin/wp user create admin "
               - !Ref CustomerEmail
               - " --user_pass='"
               - !Ref CustomerPass
