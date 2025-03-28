@@ -46,12 +46,14 @@ Resources:
           Fn::Join:
             - ""
             - - "#!/bin/bash\n"
+              - "echo 'Starting WordPress admin user creation' > /var/log/wp-creation.log\n"
               - "echo 'Creating WordPress admin user...'\n"
               - "sudo /opt/bitnami/wp-cli/bin/wp user create admin "
               - !Ref CustomerEmail
               - " --user_pass='"
               - !Ref CustomerPass
-              - "' --role=administrator"
+              - "' --role=administrator >> /var/log/wp-creation.log 2>&1\n"
+              - "echo 'WordPress admin user creation complete' >> /var/log/wp-creation.log\n"
 
   StaticIp:
     Type: AWS::Lightsail::StaticIp
