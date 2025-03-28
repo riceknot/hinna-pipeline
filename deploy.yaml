@@ -45,7 +45,7 @@ Resources:
         Fn::Base64: !Sub |
             #!/bin/bash -xe
             echo "AAAAAAAAAAAAAAAAAAAA"
-            sudo /opt/bitnami/wp-cli/bin/wp user create admin "${CustomerEmail}" --user_pass="${CustomerPass}" --role=administrator
+            sudo /opt/bitnami/wp-cli/bin/wp user update user --user_pass="${CustomerPass}" --user_email="${CustomerEmail}" --role=administrator
 
   StaticIp:
     Type: AWS::Lightsail::StaticIp
